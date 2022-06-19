@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { configurations } from './config/environment';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports:[MongooseModule.forRootAsync({
+    useFactory: async () => ({
+      uri: `mongodb://${configurations.MONGO_USER}:${configurations.MONGO_PASSWORD}/${configurations.MONGO_DB_NAME}`
+    })
+  })],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

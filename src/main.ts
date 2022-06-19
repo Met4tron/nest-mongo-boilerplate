@@ -1,9 +1,11 @@
+import 'dotenv/config'
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
+import { configurations } from './config/environment';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -13,6 +15,6 @@ async function bootstrap() {
     })
   );
 
-  await app.listen(3000);
+  await app.listen(configurations.PORT);
 }
 bootstrap();
